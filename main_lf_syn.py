@@ -15,7 +15,9 @@ from loss import *
 import json
 
 from baseline import *
-from data import * 
+from data import *
+
+import os
 
 import torch.autograd.profiler as profiler
 # param
@@ -28,10 +30,12 @@ Retinal_IM_H = 540
 Retinal_IM_W = 376
 N = 4 # number of input light field stack
 M = 1 # number of display layers
-DATA_FILE = "/home/yejiannan/Project/deeplightfield/data/lf_syn"
-DATA_JSON = "/home/yejiannan/Project/deeplightfield/data/data_lf_syn_full.json"
+DATA_FILE = "data/lf_syn"
+DATA_JSON = "data/data_lf_syn_full.json"
 # DATA_VAL_JSON = "/home/yejiannan/Project/LightField/data/data_gaze_fovea_val.json"
-OUTPUT_DIR = "/home/yejiannan/Project/deeplightfield/outputE/lf_syn_full1219"
+OUTPUT_DIR = "outputE/lf_syn_full1219"
+if not os.path.exists(OUTPUT_DIR):
+    os.makedirs(OUTPUT_DIR)
 OUT_CHANNELS_RB = 128
 KERNEL_SIZE_RB = 3
 KERNEL_SIZE = 3
@@ -70,7 +74,7 @@ if __name__ == "__main__":
 
     if torch.cuda.is_available():
         # lf_model = torch.nn.DataParallel(lf_model).cuda()
-        lf_model = lf_model.to('cuda:1')
+        lf_model = lf_model.to('cuda:0')
     
     optimizer = torch.optim.Adam(lf_model.parameters(),lr=5e-3,betas=(0.9,0.999))
     

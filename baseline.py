@@ -2,7 +2,7 @@ import torch
 def var_or_cuda(x):
     if torch.cuda.is_available():
         # x = x.cuda(non_blocking=True)
-        x = x.to('cuda:1')
+        x = x.to('cuda:0')
     return x
 
 class residual_block(torch.nn.Module):

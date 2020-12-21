@@ -4,7 +4,7 @@ from perc_loss import *
 
 l1loss = torch.nn.L1Loss()
 perc_loss = VGGPerceptualLoss() 
-perc_loss = perc_loss.to("cuda:1")
+perc_loss = perc_loss.to("cuda:0")
 
 ##### LOSS #####
 def calImageGradients(images):
